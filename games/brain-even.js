@@ -9,7 +9,7 @@ console.log('Answer "yes" if the number is even, otherwise answer "no".');
 
 for (let i = 1; i < 4; i += 1) {
   const randomNum = getRandomInt(100);
-  console.log(randomNum);
+  console.log(`Question: ${randomNum}`);
   const yourAnswer = readlineSync.question('Your answer: ');
   let correctAnswer = '';
   switch (randomNum % 2) {
