@@ -1,22 +1,24 @@
-export const getRandomInt = (max) => Math.floor(Math.random() * max);
+import readLineSync from 'readline-sync';
 
-export const NOD = (x, y) => {
-  if (y > x) return NOD(y, x);
-  if (!y) return x;
-  return NOD(y, x % y);
-};
+const roundsCount = 3;
 
-export const primeNumber = (n) => {
-  if (n === 2) return 'yes';
-  if (n > 2) {
-    let i = 2;
-    const limit = Math.sqrt(n);
-    while (i <= limit) {
-      if (n % i === 0) {
-        return 'no';
-      }
-      i += 1;
+const runGame = (gDescription, gData) => {
+  console.log('Welcome to the Brain Games!');
+  const name = readLineSync.question('May I have your name? ');
+  console.log(`Hello, ${name}!`);
+  console.log(gDescription);
+  for (let i = 0; i < roundsCount; i += 1) {
+    const [question, correctAnswer] = gData();
+    console.log(`Question: ${question}`);
+    const answer = readLineSync.question('Your answer: ');
+    if (correctAnswer === answer) {
+      console.log('Correct');
+    } else {
+      console.log(`${answer} is wrong answer ;(. Correct answer was ${correctAnswer}. \nLet's try again, ${name}!`);
+      return;
     }
   }
-  return 'yes';
+  console.log(`Congratulations, ${name}!`);
 };
+
+export default runGame;
